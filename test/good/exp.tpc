@@ -1,4 +1,9 @@
+int b[5];
+
 int main(void) {
     char c;
     c = 'c';
+    while (a > b) {
+
+    }
 }

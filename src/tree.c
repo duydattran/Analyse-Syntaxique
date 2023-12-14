@@ -6,10 +6,7 @@
 extern int lineno;       /* from lexer */
 
 static const char *StringFromLabel[] = {
-  "E",
-  "T",
-  "divstar",
-  "id"
+  FOREACH_LABEL(GENERATE_STRING)
   /* list all other node labels, if any */
   /* The list must coincide with the label_t enum in tree.h */
   /* To avoid listing them twice, see https://stackoverflow.com/a/10966395 */

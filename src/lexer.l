@@ -1,6 +1,7 @@
 %option nounput
 %option noinput
 %{
+#include "tree.h"
 #include "parser.h"
 int lineno = 1;
 %}
