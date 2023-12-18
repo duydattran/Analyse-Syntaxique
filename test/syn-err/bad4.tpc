@@ -1,0 +1,6 @@
+//Incorrect Comment Closure
+int main(void) {
+    /* Syntax error - Incorrect comment closure
+    printf("Hello, world!\n");
+    return 0;
+}

@@ -1,0 +1,6 @@
+int main(void) {
+    int num;
+    num = 10;
+    printf(num);
+    return 0;
+}

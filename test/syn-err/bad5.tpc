@@ -1,0 +1,6 @@
+//Missing size of array
+int main(void) {
+    int a[];
+    printf(helloWorld);
+    return 0;
+}

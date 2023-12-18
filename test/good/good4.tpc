@@ -1,0 +1,8 @@
+void displayMessage(void) {
+    printf(someMessages);
+}
+
+int main(void) {
+    displayMessage();
+    return 0;
+}

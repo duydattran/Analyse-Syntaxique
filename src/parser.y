@@ -2,7 +2,9 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
+#include <getopt.h>
 #include "tree.h"
+int tree = 0, help = 0;
 int yylex();
 void yyerror(char *msg);
 extern int lineno;
@@ -31,7 +33,8 @@ Prog            : DeclVars DeclFoncts                   {
                                                             $$ = makeNode(Program, NULL);
                                                             addChild($$, $1);
                                                             addSibling($1, $2);
-                                                            printTree($$);
+                                                            if (tree == 1)
+                                                                printTree($$);
                                                         }
                 ;
 DeclVars        : DeclVars TYPE Declarateurs ';'        {           
@@ -165,7 +168,7 @@ Instr           : LValue '=' Exp ';'                    {
                                                             addSibling($3, $5);
                                                         }
                 | IDENT '(' Arguments  ')' ';'          {
-                                                            $$ = makeNode(Ident, NULL);
+                                                            $$ = makeNode(Ident, $1);
                                                             addChild($$, $3);
                                                         }
                 | RETURN Exp ';'                        {
@@ -288,7 +291,35 @@ ListExp         : ListExp ',' Exp                       {
 %%
 
 int main(int argc, char **argv) {
-  return yyparse();
+    int opt;
+
+    struct option long_options[] = {
+        {"help", no_argument, 0, 'h'},
+        {"tree", no_argument, 0, 't'},
+        {0, 0, 0, 0}
+    };
+
+    while ((opt = getopt_long(argc, argv, "ht", long_options, NULL)) != -1) {
+        switch (opt) {
+            case 'h':
+                help = 1;
+                break;
+            case 't':
+                tree = 1;
+                break;
+            default:
+                return 2;
+        }
+    }
+
+    if (help) {
+        printf("Usage: ./tpcas [OPTIONS] < file.tpc.\n");
+        printf("Options: -t | --tree affiche l’arbre abstrait sur la sortie standard.\n");
+        printf("         -h | --help affiche une description de l’interface utilisateur et termine l’exécution.\n");
+        return 0;
+    }
+
+    return yyparse();
 }
 
 void yyerror (char *s) {

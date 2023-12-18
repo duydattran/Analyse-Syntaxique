@@ -1,0 +1,5 @@
+//Missing void argument
+int main() {
+    printf("Syntax error - Missing semicolon");
+    return 0;
+}
