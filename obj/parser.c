@@ -70,12 +70,14 @@
 #line 1 "src/parser.y"
 
 #include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
 #include "tree.h"
 int yylex();
 void yyerror(char *msg);
 extern int lineno;
 
-#line 79 "obj/parser.c"
+#line 81 "obj/parser.c"
 
 # ifndef YY_CAST
 #  ifdef __cplusplus
@@ -111,11 +113,11 @@ enum yysymbol_kind_t
   YYSYMBOL_DIVSTAR = 5,                    /* DIVSTAR  */
   YYSYMBOL_NUM = 6,                        /* NUM  */
   YYSYMBOL_IDENT = 7,                      /* IDENT  */
-  YYSYMBOL_ORDER = 8,                      /* ORDER  */
-  YYSYMBOL_EQ = 9,                         /* EQ  */
-  YYSYMBOL_OR = 10,                        /* OR  */
-  YYSYMBOL_AND = 11,                       /* AND  */
-  YYSYMBOL_TYPE = 12,                      /* TYPE  */
+  YYSYMBOL_TYPE = 8,                       /* TYPE  */
+  YYSYMBOL_ORDER = 9,                      /* ORDER  */
+  YYSYMBOL_EQ = 10,                        /* EQ  */
+  YYSYMBOL_OR = 11,                        /* OR  */
+  YYSYMBOL_AND = 12,                       /* AND  */
   YYSYMBOL_VOID = 13,                      /* VOID  */
   YYSYMBOL_IF = 14,                        /* IF  */
   YYSYMBOL_ELSE = 15,                      /* ELSE  */
@@ -480,7 +482,7 @@ union yyalloc
 /* YYFINAL -- State number of the termination state.  */
 #define YYFINAL  3
 /* YYLAST -- Last index in YYTABLE.  */
-#define YYLAST   129
+#define YYLAST   127
 
 /* YYNTOKENS -- Number of terminals.  */
 #define YYNTOKENS  28
@@ -540,12 +542,12 @@ static const yytype_int8 yytranslate[] =
 /* YYRLINE[YYN] -- Source line where rule number YYN was defined.  */
 static const yytype_int16 yyrline[] =
 {
-       0,    31,    31,    38,    45,    47,    55,    69,    80,    86,
-      91,    96,   102,   114,   127,   132,   137,   147,   161,   168,
-     180,   190,   195,   197,   206,   217,   231,   242,   254,   262,
-     269,   277,   283,   290,   295,   302,   307,   314,   319,   326,
-     331,   338,   343,   350,   355,   361,   367,   375,   380,   385,
-     389,   400,   405,   416,   420,   422,   429
+       0,    30,    30,    37,    43,    47,    52,    58,    63,    67,
+      71,    76,    82,    90,    99,   104,   109,   114,   119,   124,
+     130,   136,   140,   144,   149,   154,   162,   167,   171,   175,
+     178,   181,   185,   190,   194,   199,   203,   208,   212,   217,
+     221,   226,   230,   235,   239,   243,   247,   250,   253,   256,
+     259,   264,   267,   272,   275,   279,   284
 };
 #endif
 
@@ -562,7 +564,7 @@ static const char *yysymbol_name (yysymbol_kind_t yysymbol) YY_ATTRIBUTE_UNUSED;
 static const char *const yytname[] =
 {
   "\"end of file\"", "error", "\"invalid token\"", "CHARACTER", "ADDSUB",
-  "DIVSTAR", "NUM", "IDENT", "ORDER", "EQ", "OR", "AND", "TYPE", "VOID",
+  "DIVSTAR", "NUM", "IDENT", "TYPE", "ORDER", "EQ", "OR", "AND", "VOID",
   "IF", "ELSE", "WHILE", "RETURN", "';'", "','", "'['", "']'", "'('",
   "')'", "'{'", "'}'", "'='", "'!'", "$accept", "Prog", "DeclVars",
   "Declarateurs", "DeclFoncts", "DeclFonct", "EnTeteFonct", "Parametres",
@@ -591,18 +593,18 @@ yysymbol_name (yysymbol_kind_t yysymbol)
    STATE-NUM.  */
 static const yytype_int8 yypact[] =
 {
-     -72,     4,    66,   -72,    14,    19,    68,   -72,    21,    26,
-      64,    38,    48,   -72,   -72,   -72,    59,    73,   -72,    63,
-      73,    52,    75,    67,    69,   -72,    70,    71,    72,    74,
-      82,    18,   -72,    76,   -72,    79,    88,   -72,    78,    51,
-      77,    80,     2,   -72,   -72,   -72,   -72,    81,    83,    93,
-      84,    11,    11,    11,    11,   -72,    11,   -72,    55,   -72,
-      11,    11,    13,    90,    86,    95,   102,   103,   -72,   -72,
-      33,    11,   -72,    89,   -72,     1,   100,    91,    92,    -7,
-      31,   -72,    11,    43,   -72,    11,   -72,    11,    11,    11,
-      11,    11,   -72,    54,    94,   -72,    98,    11,    45,    45,
-      96,   -72,    90,    86,    95,   102,   103,   -72,   -72,   -72,
-     -72,   100,    97,   -72,   -72,    45,   -72
+     -72,     3,    52,   -72,    15,    19,    62,   -72,    42,    54,
+      27,    32,    66,   -72,   -72,   -72,    76,    64,   -72,    78,
+      64,    61,    79,    65,    81,   -72,    67,    70,    71,    69,
+      86,    18,   -72,    74,   -72,    87,    90,   -72,    77,    58,
+      80,    82,     2,   -72,   -72,   -72,   -72,    72,    84,    92,
+      85,    11,    11,    11,    11,   -72,    11,   -72,    59,   -72,
+      11,    11,    37,    88,    91,    94,   103,   104,   -72,   -72,
+      33,    11,   -72,    93,   -72,    10,    97,    89,    95,    -7,
+       0,   -72,    11,    30,   -72,    11,   -72,    11,    11,    11,
+      11,    11,   -72,    53,    96,   -72,    98,    11,    45,    45,
+      99,   -72,    88,    91,    94,   103,   104,   -72,   -72,   -72,
+     -72,    97,   100,   -72,   -72,    45,   -72
 };
 
 /* YYDEFACT[STATE-NUM] -- Default reduction number in state STATE-NUM.
@@ -627,9 +629,9 @@ static const yytype_int8 yydefact[] =
 /* YYPGOTO[NTERM-NUM].  */
 static const yytype_int8 yypgoto[] =
 {
-     -72,   -72,    99,   -72,   -72,   111,   -72,   101,   -72,   -72,
-      85,   -71,   -41,    35,    36,    30,    37,    32,   -54,   -31,
-      42,   -72
+     -72,   -72,   105,   -72,   -72,   112,   -72,   101,   -72,   -72,
+      83,   -71,   -41,    25,    24,    35,    31,    34,   -54,   -31,
+      43,   -72
 };
 
 /* YYDEFGOTO[NTERM-NUM].  */
@@ -645,51 +647,51 @@ static const yytype_int8 yydefgoto[] =
    number is the opposite.  If YYTABLE_NINF, syntax error.  */
 static const yytype_int8 yytable[] =
 {
-      47,    62,    81,    85,     3,    55,    56,    84,    57,    58,
+      47,    62,    81,     3,    85,    55,    56,    84,    57,    58,
       75,    85,    79,    80,    55,    56,    98,    57,    58,    83,
-      59,     9,    95,    85,    60,    39,    11,   112,   113,    61,
-      93,    86,    40,    60,    41,    42,    43,   107,    61,    47,
-      39,    85,    44,    45,   116,    14,    16,    40,    17,    41,
-      42,    43,    39,    85,    99,    21,   111,    44,    92,    40,
-      20,    41,    42,    43,    85,    23,   101,    47,    47,    44,
-      28,    51,   108,    52,    17,    51,    33,    82,     4,     5,
-      12,     5,    18,    19,    47,    24,    25,    30,    32,    38,
-      35,    49,    36,    34,    50,    88,    48,    37,    16,    53,
-      73,    87,    54,    89,    72,    74,    90,    71,    91,    94,
-      85,    97,   115,    22,    96,   109,   110,    13,   104,   114,
-     102,    29,   106,   103,   100,     0,   105,     0,     0,    70
+      59,    85,     9,    99,    60,    39,    11,   112,   113,    61,
+      93,    95,    40,    60,    41,    42,    43,   107,    61,    47,
+      39,    85,    44,    45,   116,    18,    19,    40,    85,    41,
+      42,    43,    39,   101,    20,    86,   111,    44,    92,    40,
+       4,    41,    42,    43,    85,     5,    14,    47,    47,    44,
+      12,   108,    24,    21,    16,     5,    17,    25,    51,    51,
+      52,    82,    23,    17,    47,    28,    32,    30,    33,    35,
+      34,    36,    37,    38,    48,    49,    50,    16,    71,    73,
+      87,    88,    53,    89,    54,    72,    74,    90,    85,    91,
+     102,   103,    96,    94,    97,   115,   110,   109,    13,    22,
+     105,    29,   114,   104,   106,   100,     0,    70
 };
 
 static const yytype_int8 yycheck[] =
 {
-      31,    42,    56,    10,     0,     3,     4,    61,     6,     7,
-      51,    10,    53,    54,     3,     4,    23,     6,     7,    60,
-      18,     7,    21,    10,    22,     7,     7,    98,    99,    27,
-      71,    18,    14,    22,    16,    17,    18,    91,    27,    70,
-       7,    10,    24,    25,   115,    24,    20,    14,    22,    16,
-      17,    18,     7,    10,    23,     7,    97,    24,    25,    14,
-      22,    16,    17,    18,    10,     6,    23,    98,    99,    24,
-       7,    20,    18,    22,    22,    20,     7,    22,    12,    13,
-      12,    13,    18,    19,   115,    12,    13,    12,    21,     7,
-      19,    12,    20,    23,     6,     9,    20,    23,    20,    22,
-       7,    11,    22,     8,    21,    21,     4,    26,     5,    20,
-      10,    19,    15,    14,    23,    21,    18,     6,    88,    23,
-      85,    20,    90,    87,    82,    -1,    89,    -1,    -1,    44
+      31,    42,    56,     0,    11,     3,     4,    61,     6,     7,
+      51,    11,    53,    54,     3,     4,    23,     6,     7,    60,
+      18,    11,     7,    23,    22,     7,     7,    98,    99,    27,
+      71,    21,    14,    22,    16,    17,    18,    91,    27,    70,
+       7,    11,    24,    25,   115,    18,    19,    14,    11,    16,
+      17,    18,     7,    23,    22,    18,    97,    24,    25,    14,
+       8,    16,    17,    18,    11,    13,    24,    98,    99,    24,
+       8,    18,     8,     7,    20,    13,    22,    13,    20,    20,
+      22,    22,     6,    22,   115,     7,    21,     8,     7,    19,
+      23,    20,    23,     7,    20,     8,     6,    20,    26,     7,
+      12,    10,    22,     9,    22,    21,    21,     4,    11,     5,
+      85,    87,    23,    20,    19,    15,    18,    21,     6,    14,
+      89,    20,    23,    88,    90,    82,    -1,    44
 };
 
 /* YYSTOS[STATE-NUM] -- The symbol kind of the accessing symbol of
    state STATE-NUM.  */
 static const yytype_int8 yystos[] =
 {
-       0,    29,    30,     0,    12,    13,    32,    33,    34,     7,
-      31,     7,    12,    33,    24,    37,    20,    22,    18,    19,
-      22,     7,    30,     6,    12,    13,    35,    36,     7,    35,
-      12,    38,    21,     7,    23,    19,    20,    23,     7,     7,
-      14,    16,    17,    18,    24,    25,    39,    47,    20,    12,
+       0,    29,    30,     0,     8,    13,    32,    33,    34,     7,
+      31,     7,     8,    33,    24,    37,    20,    22,    18,    19,
+      22,     7,    30,     6,     8,    13,    35,    36,     7,    35,
+       8,    38,    21,     7,    23,    19,    20,    23,     7,     7,
+      14,    16,    17,    18,    24,    25,    39,    47,    20,     8,
        6,    20,    22,    22,    22,     3,     4,     6,     7,    18,
       22,    27,    40,    41,    42,    43,    44,    45,    46,    47,
       38,    26,    21,     7,    21,    40,    40,    48,    49,    40,
-      40,    46,    22,    40,    46,    10,    18,    11,     9,     8,
+      40,    46,    22,    40,    46,    11,    18,    12,    10,     9,
        4,     5,    25,    40,    20,    21,    23,    19,    23,    23,
       48,    23,    41,    42,    43,    44,    45,    46,    18,    21,
       18,    40,    39,    39,    23,    15,    39
@@ -1178,664 +1180,519 @@ yyreduce:
   switch (yyn)
     {
   case 2: /* Prog: DeclVars DeclFoncts  */
-#line 31 "src/parser.y"
+#line 30 "src/parser.y"
                                                         {
-                                                            (yyval.node) = makeNode(prog);
+                                                            (yyval.node) = makeNode(Program, NULL);
                                                             addChild((yyval.node), (yyvsp[-1].node));
-                                                            addChild((yyval.node), (yyvsp[0].node));
+                                                            addSibling((yyvsp[-1].node), (yyvsp[0].node));
                                                             printTree((yyval.node));
                                                         }
-#line 1189 "obj/parser.c"
+#line 1191 "obj/parser.c"
     break;
 
   case 3: /* DeclVars: DeclVars TYPE Declarateurs ';'  */
-#line 38 "src/parser.y"
-                                                        {
-                                                            (yyval.node) = makeNode(declvars);
-                                                            Node *f = makeNode(type);
-                                                            addChild((yyval.node), (yyvsp[-3].node));
-                                                            addChild((yyval.node), f);
-                                                            addChild((yyval.node), (yyvsp[-1].node));
+#line 37 "src/parser.y"
+                                                        {           
+                                                            Node *f = makeNode(Type, (yyvsp[-2].value));
+                                                            addChild(f, (yyvsp[-1].node));
+                                                            addChild((yyvsp[-3].node), f);
+                                                            (yyval.node) = (yyvsp[-3].node);
                                                         }
-#line 1201 "obj/parser.c"
+#line 1202 "obj/parser.c"
     break;
 
   case 4: /* DeclVars: %empty  */
-#line 45 "src/parser.y"
-                                                        {/*do nothing*/}
-#line 1207 "obj/parser.c"
+#line 43 "src/parser.y"
+                                                        {
+                                                            (yyval.node) = makeNode(Declarations, NULL);
+                                                        }
+#line 1210 "obj/parser.c"
     break;
 
   case 5: /* Declarateurs: Declarateurs ',' IDENT  */
 #line 47 "src/parser.y"
                                                         {
-                                                            (yyval.node) = makeNode(declarateurs);
-                                                            Node *f1 = makeNode(comma);
-                                                            Node *f2 = makeNode(ident);
-                                                            addSibling((yyval.node), (yyvsp[-2].node));
-                                                            addChild((yyval.node), f1);
-                                                            addChild((yyval.node), f2);
+                                                            Node *f = makeNode(Ident, (yyvsp[0].value));
+                                                            addSibling((yyvsp[-2].node), f);
+                                                            (yyval.node) = (yyvsp[-2].node);
                                                         }
 #line 1220 "obj/parser.c"
     break;
 
   case 6: /* Declarateurs: Declarateurs ',' IDENT '[' NUM ']'  */
-#line 55 "src/parser.y"
+#line 52 "src/parser.y"
                                                         {
-                                                            (yyval.node) = makeNode(declarateurs);
-                                                            Node *f1 = makeNode(comma);
-                                                            Node *f2 = makeNode(ident);
-                                                            Node *f3 = makeNode(opsqbracket);
-                                                            Node *f4 = makeNode(num);
-                                                            Node *f5 = makeNode(clsqbracket);
-                                                            addSibling((yyval.node), (yyvsp[-5].node));
-                                                            addChild((yyval.node), f1);
-                                                            addChild((yyval.node), f2);
-                                                            addChild((yyval.node), f3);
-                                                            addChild((yyval.node), f4);
-                                                            addChild((yyval.node), f5);
+                                                            Node *f = makeNode(Ident, (yyvsp[-3].value));
+                                                            addChild(f, makeNode(num, (yyvsp[-1].value)));
+                                                            addSibling((yyvsp[-5].node), f);
+                                                            (yyval.node) = (yyvsp[-5].node);
                                                         }
-#line 1239 "obj/parser.c"
+#line 1231 "obj/parser.c"
     break;
 
   case 7: /* Declarateurs: IDENT '[' NUM ']'  */
-#line 69 "src/parser.y"
+#line 58 "src/parser.y"
                                                         {
-                                                            (yyval.node) = makeNode(declarateurs);
-                                                            Node *f2 = makeNode(ident);
-                                                            Node *f3 = makeNode(opsqbracket);
-                                                            Node *f4 = makeNode(num);
-                                                            Node *f5 = makeNode(clsqbracket);
-                                                            addChild((yyval.node), f2);
-                                                            addChild((yyval.node), f3);
-                                                            addChild((yyval.node), f4);
-                                                            addChild((yyval.node), f5);
+                                                            (yyval.node) = makeNode(Ident, (yyvsp[-3].value));
+                                                            Node *f = makeNode(num, (yyvsp[-1].value));
+                                                            addChild((yyval.node), f);
                                                         }
-#line 1255 "obj/parser.c"
+#line 1241 "obj/parser.c"
     break;
 
   case 8: /* Declarateurs: IDENT  */
-#line 80 "src/parser.y"
+#line 63 "src/parser.y"
                                                         {
-                                                            (yyval.node) = makeNode(declarateurs);
-                                                            Node *f2 = makeNode(ident);
-                                                            addChild((yyval.node), f2);
+                                                            (yyval.node) = makeNode(Ident, (yyvsp[0].value));
                                                         }
-#line 1265 "obj/parser.c"
+#line 1249 "obj/parser.c"
     break;
 
   case 9: /* DeclFoncts: DeclFoncts DeclFonct  */
-#line 86 "src/parser.y"
+#line 67 "src/parser.y"
                                                         {
-                                                            (yyval.node) = makeNode(declfoncts);
-                                                            addSibling((yyval.node), (yyvsp[-1].node));
-                                                            addChild((yyval.node), (yyvsp[0].node));
+                                                            addChild((yyvsp[-1].node), (yyvsp[0].node));
+                                                            (yyval.node) = (yyvsp[-1].node);
                                                         }
-#line 1275 "obj/parser.c"
+#line 1258 "obj/parser.c"
     break;
 
   case 10: /* DeclFoncts: DeclFonct  */
-#line 91 "src/parser.y"
+#line 71 "src/parser.y"
                                                         {
-                                                            (yyval.node) = makeNode(declfoncts);
+                                                            (yyval.node) = makeNode(Functions, NULL);
                                                             addChild((yyval.node), (yyvsp[0].node));
                                                         }
-#line 1284 "obj/parser.c"
+#line 1267 "obj/parser.c"
     break;
 
   case 11: /* DeclFonct: EnTeteFonct Corps  */
-#line 96 "src/parser.y"
+#line 76 "src/parser.y"
                                                         {
-                                                            (yyval.node) = makeNode(declfonct);
+                                                            (yyval.node) = makeNode(Function, NULL);
                                                             addChild((yyval.node), (yyvsp[-1].node));
-                                                            addChild((yyval.node), (yyvsp[0].node));
+                                                            addSibling((yyvsp[-1].node), (yyvsp[0].node));
                                                         }
-#line 1294 "obj/parser.c"
+#line 1277 "obj/parser.c"
     break;
 
   case 12: /* EnTeteFonct: TYPE IDENT '(' Parametres ')'  */
-#line 102 "src/parser.y"
+#line 82 "src/parser.y"
                                                         {
-                                                            (yyval.node) = makeNode(entetefonct);
-                                                            Node *f1 = makeNode(type);
-                                                            Node *f2 = makeNode(ident);
-                                                            Node *f3 = makeNode(opParen);
-                                                            Node *f4 = makeNode(clParen);
+                                                            (yyval.node) = makeNode(Header, NULL);
+                                                            Node *f1 = makeNode(Type, (yyvsp[-4].value));
+                                                            Node *f2 = makeNode(Ident, (yyvsp[-3].value));
                                                             addChild((yyval.node), f1);
-                                                            addChild((yyval.node), f2);
-                                                            addChild((yyval.node), f3);
-                                                            addChild((yyval.node), (yyvsp[-1].node));
-                                                            addChild((yyval.node), f4);
+                                                            addSibling(f1, f2);
+                                                            addSibling(f1, (yyvsp[-1].node));
                                                         }
-#line 1311 "obj/parser.c"
+#line 1290 "obj/parser.c"
     break;
 
   case 13: /* EnTeteFonct: VOID IDENT '(' Parametres ')'  */
-#line 114 "src/parser.y"
+#line 90 "src/parser.y"
                                                         {
-                                                            (yyval.node) = makeNode(entetefonct);
-                                                            Node *f1 = makeNode(Void);
-                                                            Node *f2 = makeNode(ident);
-                                                            Node *f3 = makeNode(opParen);
-                                                            Node *f4 = makeNode(clParen);
+                                                            (yyval.node) = makeNode(Header, NULL);
+                                                            Node *f1 = makeNode(Void, NULL);
+                                                            Node *f2 = makeNode(Ident, (yyvsp[-3].value));
                                                             addChild((yyval.node), f1);
                                                             addChild((yyval.node), f2);
-                                                            addChild((yyval.node), f3);
                                                             addChild((yyval.node), (yyvsp[-1].node));
-                                                            addChild((yyval.node), f4);
                                                         }
-#line 1328 "obj/parser.c"
+#line 1303 "obj/parser.c"
     break;
 
   case 14: /* Parametres: VOID  */
-#line 127 "src/parser.y"
+#line 99 "src/parser.y"
                                                         {
-                                                            (yyval.node) = makeNode(parametres);
-                                                            Node *f = makeNode(Void);
+                                                            (yyval.node) = makeNode(Parametres, NULL);
+                                                            Node *f = makeNode(Void, NULL);
                                                             addChild((yyval.node), f);
                                                         }
-#line 1338 "obj/parser.c"
+#line 1313 "obj/parser.c"
     break;
 
   case 15: /* Parametres: ListTypVar  */
-#line 132 "src/parser.y"
+#line 104 "src/parser.y"
                                                         {
-                                                            (yyval.node) = makeNode(parametres);
+                                                            (yyval.node) = makeNode(Parametres, NULL);
                                                             addChild((yyval.node), (yyvsp[0].node));
                                                         }
-#line 1347 "obj/parser.c"
+#line 1322 "obj/parser.c"
     break;
 
   case 16: /* ListTypVar: ListTypVar ',' TYPE IDENT  */
-#line 137 "src/parser.y"
+#line 109 "src/parser.y"
                                                         {
-                                                            (yyval.node) = makeNode(listtypvar);
-                                                            Node *f1 = makeNode(comma);
-                                                            Node *f2 = makeNode(type);
-                                                            Node *f3 = makeNode(ident);
+                                                            (yyval.node) = makeNode(Type, (yyvsp[-1].value));
+                                                            addChild((yyval.node), makeNode(Ident, (yyvsp[0].value)));
                                                             addSibling((yyval.node), (yyvsp[-3].node));
+                                                        }
+#line 1332 "obj/parser.c"
+    break;
+
+  case 17: /* ListTypVar: ListTypVar ',' TYPE IDENT '[' ']'  */
+#line 114 "src/parser.y"
+                                                        {
+                                                            (yyval.node) = makeNode(Type, (yyvsp[-3].value));
+                                                            addChild((yyval.node), makeNode(Ident, (yyvsp[-2].value)));
+                                                            addSibling((yyval.node), (yyvsp[-5].node));
+                                                        }
+#line 1342 "obj/parser.c"
+    break;
+
+  case 18: /* ListTypVar: TYPE IDENT  */
+#line 119 "src/parser.y"
+                                                        {
+                                                            (yyval.node) = makeNode(Type, (yyvsp[-1].value));
+                                                            Node *f1 = makeNode(Ident, (yyvsp[0].value));
                                                             addChild((yyval.node), f1);
-                                                            addChild((yyval.node), f2);
-                                                            addChild((yyval.node), f3);
+                                                        }
+#line 1352 "obj/parser.c"
+    break;
+
+  case 19: /* ListTypVar: TYPE IDENT '[' ']'  */
+#line 124 "src/parser.y"
+                                                        {
+                                                            (yyval.node) = makeNode(Type, (yyvsp[-3].value));
+                                                            Node *f1 = makeNode(Ident, (yyvsp[-2].value));
+                                                            addChild((yyval.node), f1);
                                                         }
 #line 1362 "obj/parser.c"
     break;
 
-  case 17: /* ListTypVar: ListTypVar ',' TYPE IDENT '[' ']'  */
-#line 147 "src/parser.y"
+  case 20: /* Corps: '{' DeclVars SuiteInstr '}'  */
+#line 130 "src/parser.y"
                                                         {
-                                                            (yyval.node) = makeNode(listtypvar);
-                                                            Node *f1 = makeNode(comma);
-                                                            Node *f2 = makeNode(type);
-                                                            Node *f3 = makeNode(ident);
-                                                            Node *f4 = makeNode(opsqbracket);
-                                                            Node *f5 = makeNode(clsqbracket);
-                                                            addSibling((yyval.node), (yyvsp[-5].node));
-                                                            addChild((yyval.node), f1);
-                                                            addChild((yyval.node), f2);
-                                                            addChild((yyval.node), f3);
-                                                            addChild((yyval.node), f4);
-                                                            addChild((yyval.node), f5);
+                                                            (yyval.node) = makeNode(Body, NULL);
+                                                            addChild((yyval.node), (yyvsp[-2].node));
+                                                            addChild((yyval.node), (yyvsp[-1].node));
+                                                        }
+#line 1372 "obj/parser.c"
+    break;
+
+  case 21: /* SuiteInstr: SuiteInstr Instr  */
+#line 136 "src/parser.y"
+                                                        {
+                                                            addChild((yyvsp[-1].node), (yyvsp[0].node));
+                                                            (yyval.node) = (yyvsp[-1].node);
                                                         }
 #line 1381 "obj/parser.c"
     break;
 
-  case 18: /* ListTypVar: TYPE IDENT  */
-#line 161 "src/parser.y"
+  case 22: /* SuiteInstr: %empty  */
+#line 140 "src/parser.y"
                                                         {
-                                                            (yyval.node) = makeNode(listtypvar);
-                                                            Node *f1 = makeNode(type);
-                                                            Node *f2 = makeNode(ident);
-                                                            addChild((yyval.node), f1);
-                                                            addChild((yyval.node), f2);
+                                                            (yyval.node) = makeNode(Instructions, NULL);
                                                         }
-#line 1393 "obj/parser.c"
+#line 1389 "obj/parser.c"
     break;
 
-  case 19: /* ListTypVar: TYPE IDENT '[' ']'  */
-#line 168 "src/parser.y"
+  case 23: /* Instr: LValue '=' Exp ';'  */
+#line 144 "src/parser.y"
                                                         {
-                                                            (yyval.node) = makeNode(listtypvar);
-                                                            Node *f1 = makeNode(type);
-                                                            Node *f2 = makeNode(ident);
-                                                            Node *f3 = makeNode(opsqbracket);
-                                                            Node *f4 = makeNode(clsqbracket);
-                                                            addChild((yyval.node), f1);
-                                                            addChild((yyval.node), f2);
-                                                            addChild((yyval.node), f3);
-                                                            addChild((yyval.node), f4);
+                                                            (yyval.node) = makeNode(Assign, "=");
+                                                            addChild((yyval.node), (yyvsp[-3].node));
+                                                            addChild((yyval.node), (yyvsp[-1].node));
+                                                        }
+#line 1399 "obj/parser.c"
+    break;
+
+  case 24: /* Instr: IF '(' Exp ')' Instr  */
+#line 149 "src/parser.y"
+                                                        {
+                                                            (yyval.node) = makeNode(If, NULL);
+                                                            addChild((yyval.node), (yyvsp[-2].node));
+                                                            addSibling((yyvsp[-2].node), (yyvsp[0].node));
                                                         }
 #line 1409 "obj/parser.c"
     break;
 
-  case 20: /* Corps: '{' DeclVars SuiteInstr '}'  */
-#line 180 "src/parser.y"
-                                                        {
-                                                            (yyval.node) = makeNode(corps);
-                                                            Node *f1 = makeNode(opbracket);
-                                                            Node *f2 = makeNode(clbracket);
-                                                            addChild((yyval.node), f1);
-                                                            addChild((yyval.node), (yyvsp[-2].node));
-                                                            addChild((yyval.node), (yyvsp[-1].node));
-                                                            addChild((yyval.node), f2);
-                                                        }
-#line 1423 "obj/parser.c"
-    break;
-
-  case 21: /* SuiteInstr: SuiteInstr Instr  */
-#line 190 "src/parser.y"
-                                                        {
-                                                            (yyval.node) = makeNode(suiteinstr);
-                                                            addSibling((yyval.node), (yyvsp[-1].node));
-                                                            addChild((yyval.node), (yyvsp[0].node));
-                                                        }
-#line 1433 "obj/parser.c"
-    break;
-
-  case 22: /* SuiteInstr: %empty  */
-#line 195 "src/parser.y"
-                                                        {/*do nothing*/}
-#line 1439 "obj/parser.c"
-    break;
-
-  case 23: /* Instr: LValue '=' Exp ';'  */
-#line 197 "src/parser.y"
-                                                        {
-                                                            (yyval.node) = makeNode(instr);
-                                                            Node *f1 = makeNode(equal);
-                                                            Node *f2 = makeNode(semicolon);
-                                                            addChild((yyval.node), (yyvsp[-3].node));
-                                                            addChild((yyval.node), f1);
-                                                            addChild((yyval.node), (yyvsp[-1].node));
-                                                            addChild((yyval.node), f2);
-                                                        }
-#line 1453 "obj/parser.c"
-    break;
-
-  case 24: /* Instr: IF '(' Exp ')' Instr  */
-#line 206 "src/parser.y"
-                                                        {
-                                                            (yyval.node) = makeNode(instr);
-                                                            Node *f1 = makeNode(opParen);
-                                                            Node *f2 = makeNode(clParen);
-                                                            Node *f3 = makeNode(If);
-                                                            addSibling((yyval.node), (yyvsp[0].node));
-                                                            addChild((yyval.node), f3);
-                                                            addChild((yyval.node), f1);
-                                                            addChild((yyval.node), (yyvsp[-2].node));
-                                                            addChild((yyval.node), f2);
-                                                        }
-#line 1469 "obj/parser.c"
-    break;
-
   case 25: /* Instr: IF '(' Exp ')' Instr ELSE Instr  */
-#line 217 "src/parser.y"
+#line 154 "src/parser.y"
                                                         {
-                                                            (yyval.node) = makeNode(instr);
-                                                            Node *f1 = makeNode(opParen);
-                                                            Node *f2 = makeNode(clParen);
-                                                            Node *f3 = makeNode(If);
-                                                            Node *f4 = makeNode(Else);
-                                                            addSibling((yyval.node), (yyvsp[-2].node));
-                                                            addSibling((yyval.node), (yyvsp[0].node));
-                                                            addChild((yyval.node), f3);
-                                                            addChild((yyval.node), f1);
+                                                            (yyval.node) = makeNode(If, NULL);
+                                                            Node *f = makeNode(Else, NULL);
                                                             addChild((yyval.node), (yyvsp[-4].node));
-                                                            addChild((yyval.node), f2);
-                                                            addChild((yyval.node), f4);
+                                                            addSibling((yyvsp[-4].node), (yyvsp[-2].node));
+                                                            addChild(f, (yyvsp[0].node));
+                                                            addSibling((yyval.node), f);
                                                         }
-#line 1488 "obj/parser.c"
+#line 1422 "obj/parser.c"
     break;
 
   case 26: /* Instr: WHILE '(' Exp ')' Instr  */
-#line 231 "src/parser.y"
+#line 162 "src/parser.y"
                                                         {
-                                                            (yyval.node) = makeNode(instr);
-                                                            Node *f1 = makeNode(opParen);
-                                                            Node *f2 = makeNode(clParen);
-                                                            Node *f3 = makeNode(While);
-                                                            addChild((yyval.node), f3);
-                                                            addChild((yyval.node), f1);
+                                                            (yyval.node) = makeNode(While, NULL);
                                                             addChild((yyval.node), (yyvsp[-2].node));
-                                                            addChild((yyval.node), f2);
-                                                            addSibling((yyval.node), (yyvsp[0].node));
+                                                            addSibling((yyvsp[-2].node), (yyvsp[0].node));
                                                         }
-#line 1504 "obj/parser.c"
+#line 1432 "obj/parser.c"
     break;
 
   case 27: /* Instr: IDENT '(' Arguments ')' ';'  */
-#line 242 "src/parser.y"
+#line 167 "src/parser.y"
                                                         {
-                                                            (yyval.node) = makeNode(instr);
-                                                            Node *f1 = makeNode(ident);
-                                                            Node *f2 = makeNode(opParen);
-                                                            Node *f3 = makeNode(clParen);
-                                                            Node *f4 = makeNode(semicolon);
-                                                            addChild((yyval.node), f1);
-                                                            addChild((yyval.node), f2);
+                                                            (yyval.node) = makeNode(Ident, NULL);
                                                             addChild((yyval.node), (yyvsp[-2].node));
-                                                            addChild((yyval.node), f3);
-                                                            addChild((yyval.node), f4);
                                                         }
-#line 1521 "obj/parser.c"
+#line 1441 "obj/parser.c"
     break;
 
   case 28: /* Instr: RETURN Exp ';'  */
-#line 254 "src/parser.y"
+#line 171 "src/parser.y"
                                                         {
-                                                            (yyval.node) = makeNode(instr);
-                                                            Node *f1 = makeNode(Return);
-                                                            Node *f2 = makeNode(semicolon);
-                                                            addChild((yyval.node), f1);
+                                                            (yyval.node) = makeNode(Return, NULL);
                                                             addChild((yyval.node), (yyvsp[-1].node));
-                                                            addChild((yyval.node), f2);
                                                         }
-#line 1534 "obj/parser.c"
+#line 1450 "obj/parser.c"
     break;
 
   case 29: /* Instr: RETURN ';'  */
-#line 262 "src/parser.y"
+#line 175 "src/parser.y"
                                                         {
-                                                            (yyval.node) = makeNode(instr);
-                                                            Node *f1 = makeNode(Return);
-                                                            Node *f2 = makeNode(semicolon);
-                                                            addChild((yyval.node), f1);
-                                                            addChild((yyval.node), f2);
+                                                            (yyval.node) = makeNode(Return, NULL);
+                                                        }
+#line 1458 "obj/parser.c"
+    break;
+
+  case 30: /* Instr: '{' SuiteInstr '}'  */
+#line 178 "src/parser.y"
+                                                        {
+                                                            (yyval.node) = (yyvsp[-1].node);
+                                                        }
+#line 1466 "obj/parser.c"
+    break;
+
+  case 31: /* Instr: ';'  */
+#line 181 "src/parser.y"
+                                                        {
+                                                            (yyval.node) = makeNode(Instruction, NULL);
+                                                        }
+#line 1474 "obj/parser.c"
+    break;
+
+  case 32: /* Exp: Exp OR TB  */
+#line 185 "src/parser.y"
+                                                        {
+                                                            (yyval.node) = makeNode(Or, "||");
+                                                            addChild((yyval.node), (yyvsp[-2].node));
+                                                            addSibling((yyvsp[-2].node), (yyvsp[0].node));
+                                                        }
+#line 1484 "obj/parser.c"
+    break;
+
+  case 33: /* Exp: TB  */
+#line 190 "src/parser.y"
+                                                        {
+                                                            (yyval.node) = (yyvsp[0].node);
+                                                        }
+#line 1492 "obj/parser.c"
+    break;
+
+  case 34: /* TB: TB AND FB  */
+#line 194 "src/parser.y"
+                                                        {
+                                                            (yyval.node) = makeNode(And, "&&");
+                                                            addChild((yyval.node), (yyvsp[-2].node));
+                                                            addChild((yyval.node), (yyvsp[0].node));
+                                                        }
+#line 1502 "obj/parser.c"
+    break;
+
+  case 35: /* TB: FB  */
+#line 199 "src/parser.y"
+                                                        {
+                                                            (yyval.node) = (yyvsp[0].node);
+                                                        }
+#line 1510 "obj/parser.c"
+    break;
+
+  case 36: /* FB: FB EQ M  */
+#line 203 "src/parser.y"
+                                                        {
+                                                            (yyval.node) = makeNode(Eq, (yyvsp[-1].value));
+                                                            addChild((yyval.node), (yyvsp[-2].node));
+                                                            addChild((yyval.node), (yyvsp[0].node));
+                                                        }
+#line 1520 "obj/parser.c"
+    break;
+
+  case 37: /* FB: M  */
+#line 208 "src/parser.y"
+                                                        {
+                                                            (yyval.node) = (yyvsp[0].node);
+                                                        }
+#line 1528 "obj/parser.c"
+    break;
+
+  case 38: /* M: M ORDER E  */
+#line 212 "src/parser.y"
+                                                        {
+                                                            (yyval.node) = makeNode(Order, (yyvsp[-1].value));
+                                                            addChild((yyval.node), (yyvsp[-2].node));
+                                                            addChild((yyval.node), (yyvsp[0].node));
+                                                        }
+#line 1538 "obj/parser.c"
+    break;
+
+  case 39: /* M: E  */
+#line 217 "src/parser.y"
+                                                        {
+                                                            (yyval.node) = (yyvsp[0].node);
                                                         }
 #line 1546 "obj/parser.c"
     break;
 
-  case 30: /* Instr: '{' SuiteInstr '}'  */
-#line 269 "src/parser.y"
+  case 40: /* E: E ADDSUB T  */
+#line 221 "src/parser.y"
                                                         {
-                                                            (yyval.node) = makeNode(instr);
-                                                            Node *f1 = makeNode(opbracket);
-                                                            Node *f2 = makeNode(clbracket);
-                                                            addChild((yyval.node), f1);
-                                                            addChild((yyval.node), f2);
-                                                            addChild((yyval.node), (yyvsp[-1].node));
-                                                        }
-#line 1559 "obj/parser.c"
-    break;
-
-  case 31: /* Instr: ';'  */
-#line 277 "src/parser.y"
-                                                        {
-                                                            (yyval.node) = makeNode(instr);
-                                                            Node *f1 = makeNode(semicolon);
-                                                            addChild((yyval.node), f1);
-                                                        }
-#line 1569 "obj/parser.c"
-    break;
-
-  case 32: /* Exp: Exp OR TB  */
-#line 283 "src/parser.y"
-                                                        {
-                                                            (yyval.node) = makeNode(exp);
-                                                            Node *f = makeNode(or);
-                                                            addSibling((yyval.node), (yyvsp[-2].node));
-                                                            addChild((yyval.node), f);
+                                                            (yyval.node) = makeNode(AddSub, (yyvsp[-1].value));
+                                                            addChild((yyval.node), (yyvsp[-2].node));
                                                             addChild((yyval.node), (yyvsp[0].node));
                                                         }
-#line 1581 "obj/parser.c"
+#line 1556 "obj/parser.c"
     break;
 
-  case 33: /* Exp: TB  */
-#line 290 "src/parser.y"
+  case 41: /* E: T  */
+#line 226 "src/parser.y"
                                                         {
-                                                            (yyval.node) = makeNode(exp);
+                                                            (yyval.node) = (yyvsp[0].node);
+                                                        }
+#line 1564 "obj/parser.c"
+    break;
+
+  case 42: /* T: T DIVSTAR F  */
+#line 230 "src/parser.y"
+                                                        {
+                                                            (yyval.node) = makeNode(DivStar, (yyvsp[-1].value));
+                                                            addChild((yyval.node), (yyvsp[-2].node));
                                                             addChild((yyval.node), (yyvsp[0].node));
                                                         }
-#line 1590 "obj/parser.c"
+#line 1574 "obj/parser.c"
     break;
 
-  case 34: /* TB: TB AND FB  */
-#line 295 "src/parser.y"
+  case 43: /* T: F  */
+#line 235 "src/parser.y"
                                                         {
-                                                            (yyval.node) = makeNode(TB);
-                                                            Node *f = makeNode(and);
-                                                            addSibling((yyval.node), (yyvsp[-2].node));
-                                                            addChild((yyval.node), f);
+                                                            (yyval.node) = (yyvsp[0].node);
+                                                        }
+#line 1582 "obj/parser.c"
+    break;
+
+  case 44: /* F: ADDSUB F  */
+#line 239 "src/parser.y"
+                                                        {
+                                                            (yyval.node) = makeNode(AddSub, (yyvsp[-1].value));
                                                             addChild((yyval.node), (yyvsp[0].node));
                                                         }
-#line 1602 "obj/parser.c"
+#line 1591 "obj/parser.c"
     break;
 
-  case 35: /* TB: FB  */
-#line 302 "src/parser.y"
+  case 45: /* F: '!' F  */
+#line 243 "src/parser.y"
                                                         {
-                                                            (yyval.node) = makeNode(TB);
+                                                            (yyval.node) = makeNode(Not, "!");
                                                             addChild((yyval.node), (yyvsp[0].node));
                                                         }
-#line 1611 "obj/parser.c"
+#line 1600 "obj/parser.c"
     break;
 
-  case 36: /* FB: FB EQ M  */
-#line 307 "src/parser.y"
+  case 46: /* F: '(' Exp ')'  */
+#line 247 "src/parser.y"
                                                         {
-                                                            (yyval.node) = makeNode(FB);
-                                                            Node *f = makeNode(EQ);
-                                                            addSibling((yyval.node), (yyvsp[-2].node));
-                                                            addChild((yyval.node), f);
-                                                            addChild((yyval.node), (yyvsp[0].node));
+                                                            (yyval.node) = (yyvsp[-1].node);
                                                         }
-#line 1623 "obj/parser.c"
+#line 1608 "obj/parser.c"
     break;
 
-  case 37: /* FB: M  */
-#line 314 "src/parser.y"
+  case 47: /* F: NUM  */
+#line 250 "src/parser.y"
                                                         {
-                                                            (yyval.node) = makeNode(FB);
-                                                            addChild((yyval.node), (yyvsp[0].node));
+                                                            (yyval.node) = makeNode(num, (yyvsp[0].value));
+                                                        }
+#line 1616 "obj/parser.c"
+    break;
+
+  case 48: /* F: CHARACTER  */
+#line 253 "src/parser.y"
+                                                        {
+                                                            (yyval.node) = makeNode(Character, (yyvsp[0].value));
+                                                        }
+#line 1624 "obj/parser.c"
+    break;
+
+  case 49: /* F: LValue  */
+#line 256 "src/parser.y"
+                                                        {
+                                                            (yyval.node) = (yyvsp[0].node);
                                                         }
 #line 1632 "obj/parser.c"
     break;
 
-  case 38: /* M: M ORDER E  */
-#line 319 "src/parser.y"
+  case 50: /* F: IDENT '(' Arguments ')'  */
+#line 259 "src/parser.y"
                                                         {
-                                                            (yyval.node) = makeNode(M);
-                                                            Node *f = makeNode(order);
-                                                            addSibling((yyval.node), (yyvsp[-2].node));
-                                                            addChild((yyval.node), f);
-                                                            addChild((yyval.node), (yyvsp[0].node));
+                                                            (yyval.node) = makeNode(Ident, (yyvsp[-3].value));
+                                                            addChild((yyval.node), (yyvsp[-1].node));
                                                         }
-#line 1644 "obj/parser.c"
+#line 1641 "obj/parser.c"
     break;
 
-  case 39: /* M: E  */
-#line 326 "src/parser.y"
+  case 51: /* LValue: IDENT  */
+#line 264 "src/parser.y"
                                                         {
-                                                            (yyval.node) = makeNode(M);
-                                                            addChild((yyval.node), (yyvsp[0].node));
+                                                            (yyval.node) = makeNode(Ident, (yyvsp[0].value));
                                                         }
-#line 1653 "obj/parser.c"
+#line 1649 "obj/parser.c"
     break;
 
-  case 40: /* E: E ADDSUB T  */
-#line 331 "src/parser.y"
+  case 52: /* LValue: IDENT '[' Exp ']'  */
+#line 267 "src/parser.y"
                                                         {
-                                                            (yyval.node) = makeNode(E);
-                                                            Node *f = makeNode(addsub);
-                                                            addSibling((yyval.node), (yyvsp[-2].node));
-                                                            addChild((yyval.node), f);
-                                                            addChild((yyval.node), (yyvsp[0].node));
+                                                            (yyval.node) = makeNode(Ident, (yyvsp[-3].value));
+                                                            addChild((yyval.node), (yyvsp[-1].node));
                                                         }
-#line 1665 "obj/parser.c"
+#line 1658 "obj/parser.c"
     break;
 
-  case 41: /* E: T  */
-#line 338 "src/parser.y"
+  case 53: /* Arguments: ListExp  */
+#line 272 "src/parser.y"
                                                         {
-                                                            (yyval.node) = makeNode(E);
-                                                            addChild((yyval.node), (yyvsp[0].node));
+                                                            (yyval.node) = (yyvsp[0].node);
+                                                        }
+#line 1666 "obj/parser.c"
+    break;
+
+  case 54: /* Arguments: %empty  */
+#line 275 "src/parser.y"
+                                                        {
+                                                            (yyval.node) = makeNode(Arguments, NULL);
                                                         }
 #line 1674 "obj/parser.c"
     break;
 
-  case 42: /* T: T DIVSTAR F  */
-#line 343 "src/parser.y"
-                                                        {
-                                                            (yyval.node) = makeNode(T);
-                                                            Node *f = makeNode(divstar);
-                                                            addSibling((yyval.node), (yyvsp[-2].node));
-                                                            addChild((yyval.node), f);
-                                                            addChild((yyval.node), (yyvsp[0].node));
-                                                        }
-#line 1686 "obj/parser.c"
-    break;
-
-  case 43: /* T: F  */
-#line 350 "src/parser.y"
-                                                        {
-                                                            (yyval.node) = makeNode(T);
-                                                            addChild((yyval.node), (yyvsp[0].node));
-                                                        }
-#line 1695 "obj/parser.c"
-    break;
-
-  case 44: /* F: ADDSUB F  */
-#line 355 "src/parser.y"
-                                                        {
-                                                            (yyval.node) = makeNode(F);
-                                                            Node *f = makeNode(addsub);
-                                                            addChild((yyval.node), f);
-                                                            addSibling((yyval.node), (yyvsp[0].node));
-                                                        }
-#line 1706 "obj/parser.c"
-    break;
-
-  case 45: /* F: '!' F  */
-#line 361 "src/parser.y"
-                                                        {
-                                                            (yyval.node) = makeNode(F);
-                                                            Node *f = makeNode(different);
-                                                            addChild((yyval.node), f);
-                                                            addSibling((yyval.node), (yyvsp[0].node));
-                                                        }
-#line 1717 "obj/parser.c"
-    break;
-
-  case 46: /* F: '(' Exp ')'  */
-#line 367 "src/parser.y"
-                                                        {
-                                                            (yyval.node) = makeNode(F);
-                                                            Node *f1 = makeNode(opParen);
-                                                            Node *f2 = makeNode(clParen);
-                                                            addChild((yyval.node), f1);
-                                                            addChild((yyval.node), (yyvsp[-1].node));
-                                                            addChild((yyval.node), f2);
-                                                        }
-#line 1730 "obj/parser.c"
-    break;
-
-  case 47: /* F: NUM  */
-#line 375 "src/parser.y"
-                                                        {
-                                                            (yyval.node) = makeNode(F);
-                                                            Node *f = makeNode(num);
-                                                            addChild((yyval.node), f);
-                                                        }
-#line 1740 "obj/parser.c"
-    break;
-
-  case 48: /* F: CHARACTER  */
-#line 380 "src/parser.y"
-                                                        {
-                                                            (yyval.node) = makeNode(F);
-                                                            Node *f = makeNode(character);
-                                                            addChild((yyval.node), f);
-                                                        }
-#line 1750 "obj/parser.c"
-    break;
-
-  case 49: /* F: LValue  */
-#line 385 "src/parser.y"
-                                                        {
-                                                            (yyval.node) = makeNode(F);
-                                                            addChild((yyval.node), (yyvsp[0].node));
-                                                        }
-#line 1759 "obj/parser.c"
-    break;
-
-  case 50: /* F: IDENT '(' Arguments ')'  */
-#line 389 "src/parser.y"
-                                                        {
-                                                            (yyval.node) = makeNode(F);
-                                                            Node *f1 = makeNode(ident);
-                                                            Node *f2 = makeNode(opParen);
-                                                            Node *f3 = makeNode(clParen);
-                                                            addChild((yyval.node), f1);
-                                                            addChild((yyval.node), f2);
-                                                            addChild((yyval.node), (yyvsp[-1].node));
-                                                            addChild((yyval.node), f3);
-                                                        }
-#line 1774 "obj/parser.c"
-    break;
-
-  case 51: /* LValue: IDENT  */
-#line 400 "src/parser.y"
-                                                        {
-                                                            (yyval.node) = makeNode(lvalue);
-                                                            Node *f = makeNode(ident);
-                                                            addChild((yyval.node), f);
-                                                        }
-#line 1784 "obj/parser.c"
-    break;
-
-  case 52: /* LValue: IDENT '[' Exp ']'  */
-#line 405 "src/parser.y"
-                                                        {
-                                                            (yyval.node) = makeNode(lvalue);
-                                                            Node *f1 = makeNode(ident);
-                                                            Node *f2 = makeNode(opsqbracket);
-                                                            Node *f3 = makeNode(clsqbracket);
-                                                            addChild((yyval.node), f1);
-                                                            addChild((yyval.node), f2);
-                                                            addChild((yyval.node), (yyvsp[-1].node));
-                                                            addChild((yyval.node), f3);
-                                                        }
-#line 1799 "obj/parser.c"
-    break;
-
-  case 53: /* Arguments: ListExp  */
-#line 416 "src/parser.y"
-                                                        {
-                                                            (yyval.node) = makeNode(arguments);
-                                                            addChild((yyval.node), (yyvsp[0].node));
-                                                        }
-#line 1808 "obj/parser.c"
-    break;
-
-  case 54: /* Arguments: %empty  */
-#line 420 "src/parser.y"
-                                                        {/*do nothing*/}
-#line 1814 "obj/parser.c"
-    break;
-
   case 55: /* ListExp: ListExp ',' Exp  */
-#line 422 "src/parser.y"
+#line 279 "src/parser.y"
                                                         {
-                                                            (yyval.node) = makeNode(listexp);
-                                                            Node *f = makeNode(comma);
-                                                            addSibling((yyval.node), (yyvsp[-2].node));
-                                                            addChild((yyval.node), f);
+                                                            (yyval.node) = makeNode(ListExp, NULL);
+                                                            addSibling((yyvsp[0].node), (yyvsp[-2].node));
                                                             addChild((yyval.node), (yyvsp[0].node));
                                                         }
-#line 1826 "obj/parser.c"
+#line 1684 "obj/parser.c"
     break;
 
   case 56: /* ListExp: Exp  */
-#line 429 "src/parser.y"
+#line 284 "src/parser.y"
                                                         {
-                                                            (yyval.node) = makeNode(listexp);
-                                                            addChild((yyval.node), (yyvsp[0].node));
+                                                            (yyval.node) = (yyvsp[0].node);
                                                         }
-#line 1835 "obj/parser.c"
+#line 1692 "obj/parser.c"
     break;
 
 
-#line 1839 "obj/parser.c"
+#line 1696 "obj/parser.c"
 
       default: break;
     }
@@ -2028,13 +1885,13 @@ yyreturnlab:
   return yyresult;
 }
 
-#line 434 "src/parser.y"
+#line 288 "src/parser.y"
 
 
 int main(int argc, char **argv) {
   return yyparse();
 }
 
- void yyerror (char *s) {
-   fprintf (stderr, "line %d: %s\n", lineno, s);
- }
+void yyerror (char *s) {
+    fprintf (stderr, "line %d: %s\n", lineno, s);
+}

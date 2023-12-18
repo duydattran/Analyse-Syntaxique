@@ -8,48 +8,45 @@
         LABEL(While) \
         LABEL(instr) \
         LABEL(F) \
-        LABEL(opParen) \
-        LABEL(suiteinstr) \
+        LABEL(Instructions) \
+        LABEL(Instruction) \
         LABEL(lvalue) \
-        LABEL(parametres) \
+        LABEL(Parametres) \
         LABEL(declfoncts) \
         LABEL(TB) \
-        LABEL(and) \
+        LABEL(And) \
         LABEL(declarateurs) \
-        LABEL(prog) \
-        LABEL(clParen) \
+        LABEL(Program) \
         LABEL(E) \
         LABEL(exp) \
-        LABEL(semicolon) \
-        LABEL(corps) \
+        LABEL(Body) \
         LABEL(listtypvar) \
         LABEL(num) \
-        LABEL(divstar) \
-        LABEL(character) \
+        LABEL(DivStar) \
+        LABEL(Character) \
         LABEL(M) \
         LABEL(Void) \
-        LABEL(order) \
+        LABEL(Order) \
         LABEL(T) \
-        LABEL(or) \
-        LABEL(addsub) \
-        LABEL(clbracket) \
+        LABEL(Or) \
+        LABEL(AddSub) \
         LABEL(If) \
-        LABEL(listexp) \
-        LABEL(clsqbracket) \
-        LABEL(opsqbracket) \
-        LABEL(opbracket) \
+        LABEL(ListExp) \
         LABEL(FB) \
         LABEL(comma) \
-        LABEL(declvars) \
+        LABEL(Declaration) \
+        LABEL(Declarations) \
+        LABEL(Functions) \
+        LABEL(Function) \
         LABEL(Eq) \
-        LABEL(entetefonct) \
-        LABEL(type) \
+        LABEL(Header) \
+        LABEL(Type) \
         LABEL(Return) \
         LABEL(not) \
-        LABEL(ident) \
-        LABEL(arguments) \
-        LABEL(equal) \
-        LABEL(different) \
+        LABEL(Ident) \
+        LABEL(Arguments) \
+        LABEL(Assign) \
+        LABEL(Not) \
 
 #define GENERATE_ENUM(ENUM) ENUM,
 #define GENERATE_STRING(STRING) #STRING,
@@ -60,11 +57,12 @@ typedef enum {
 
 typedef struct Node {
   label_t label;
+  char value[64];
   struct Node *firstChild, *nextSibling;
   int lineno;
 } Node;
 
-Node *makeNode(label_t label);
+Node *makeNode(label_t label, char *str);
 void addSibling(Node *node, Node *sibling);
 void addChild(Node *parent, Node *child);
 void deleteTree(Node*node);

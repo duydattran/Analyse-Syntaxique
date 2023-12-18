@@ -59,11 +59,11 @@ extern int yydebug;
     DIVSTAR = 260,                 /* DIVSTAR  */
     NUM = 261,                     /* NUM  */
     IDENT = 262,                   /* IDENT  */
-    ORDER = 263,                   /* ORDER  */
-    EQ = 264,                      /* EQ  */
-    OR = 265,                      /* OR  */
-    AND = 266,                     /* AND  */
-    TYPE = 267,                    /* TYPE  */
+    TYPE = 263,                    /* TYPE  */
+    ORDER = 264,                   /* ORDER  */
+    EQ = 265,                      /* EQ  */
+    OR = 266,                      /* OR  */
+    AND = 267,                     /* AND  */
     VOID = 268,                    /* VOID  */
     IF = 269,                      /* IF  */
     ELSE = 270,                    /* ELSE  */
@@ -77,15 +77,12 @@ extern int yydebug;
 #if ! defined YYSTYPE && ! defined YYSTYPE_IS_DECLARED
 union YYSTYPE
 {
-#line 8 "src/parser.y"
+#line 10 "src/parser.y"
 
-    char byte;
-    int num;
-    char ident[64];
-    char comp[3];
+    char value[64];
     Node *node;
 
-#line 89 "obj/parser.h"
+#line 86 "obj/parser.h"
 
 };
 typedef union YYSTYPE YYSTYPE;

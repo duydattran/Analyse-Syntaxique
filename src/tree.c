@@ -2,6 +2,7 @@
 #include <stdbool.h>
 #include <stdio.h>
 #include <stdlib.h>
+#include <string.h>
 #include "tree.h"
 extern int lineno;       /* from lexer */
 
@@ -12,13 +13,16 @@ static const char *StringFromLabel[] = {
   /* To avoid listing them twice, see https://stackoverflow.com/a/10966395 */
 };
 
-Node *makeNode(label_t label) {
+Node *makeNode(label_t label, char *str) {
   Node *node = malloc(sizeof(Node));
   if (!node) {
     printf("Run out of memory\n");
     exit(1);
   }
   node->label = label;
+  node->value[0] = '\0';
+  if (str != NULL)
+    strcpy(node->value, str);
   node-> firstChild = node->nextSibling = NULL;
   node->lineno=lineno;
   return node;
@@ -61,6 +65,8 @@ void printTree(Node *node) {
     printf(rightmost[depth] ? "\u2514\u2500\u2500 " : "\u251c\u2500\u2500 ");
   }
   printf("%s", StringFromLabel[node->label]);
+  if (node->value[0] != '\0')
+    printf(": %s", node->value);
   printf("\n");
   depth++;
   for (Node *child = node->firstChild; child != NULL; child = child->nextSibling) {
